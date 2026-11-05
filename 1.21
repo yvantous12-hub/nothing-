@@ -1,0 +1,126 @@
+/open game
+/acces game 
+/minecraft
+/local workspaceService = game:GetService("Workspace")
+/1.21
+<!DOCTYPE html>
+<html style="width:100%;height:100%;background-color:black;">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+		<meta name="description" content=" minecraft 1.21 in your browser" />
+		<meta name="keywords" content="eaglercraft, minecraft, 1.21, 1.21.2" />
+		<title>Eaglercraft 1.21 WASM-GC</title>
+		<meta property="og:locale" content="en-US" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="Eaglercraft 1.21 WASM" />
+		<meta property="og:description" content="Play minecraft 1.21 in your browser" />
+		<meta property="og:image" content="favicon.png" />
+		<link type="image/png" rel="shortcut icon" href="favicon.png" />
+		<script type="text/javascript" src="bootstrap.js"></script>
+		<script type="text/javascript">
+			"use strict";
+			window.addEventListener("load", function() {
+				if(window.location.href.indexOf("file:") === 0) {
+					alert("HTTP please, do not open this file locally, run a local HTTP server and load it via HTTP");
+				}else {
+					
+					// %%%%%%%%% launch options %%%%%%%%%%%%
+					
+					var relayId = Math.floor(Math.random() * 3);
+					window.eaglercraftXOpts = {
+						demoMode: false,
+						container: "game_frame",
+						assetsURI: "assets.epw",
+						worldsDB: "worlds",
+						servers: [
+							/* example: { addr: "ws://localhost:8081/", name: "Local test server" } */
+						],
+						relays: [
+							{ addr: "wss://relay.deev.is/", comment: "lax1dude relay #1", primary: relayId == 0 },
+							{ addr: "wss://relay.lax1dude.net/", comment: "lax1dude relay #2", primary: relayId == 1 },
+							{ addr: "wss://relay.shhnowisnottheti.me/", comment: "ayunami relay #1", primary: relayId == 2 }
+						]
+					};
+					
+					// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+					
+					var q = window.location.search;
+					if((typeof q === "string") && q[0] === "?" && (typeof window.URLSearchParams !== "undefined")) {
+						q = new window.URLSearchParams(q);
+						var s = q.get("server");
+						if(s) window.eaglercraftXOpts.joinServer = s;
+					}
+					
+					main();
+					
+				}
+			});
+		</script>
+	</head>
+	<body style="margin:0px;width:100%;height:100%;overflow:hidden;background-color:black;" id="game_frame"></body>
+</html>
+plugins {
+    id 'architectury-plugin'
+}
+
+architectury {
+    common(rootProject.ext.supportedPlatforms)
+}
+
+loom {
+    accessWidenerPath = file('src/main/resources/arclight.accesswidener')
+    mixin {
+        useLegacyMixinAp = true
+        defaultRefmapName = 'arclight-common-refmap.json'
+        add sourceSets.main, 'arclight-common-refmap.json'
+    }
+}
+
+configurations {
+    mixinProcessorSupport
+}
+
+dependencies {
+    modImplementation libs.fabric.loader
+
+    compileOnly rootProject.ext.generatedSpigot
+
+    implementation libs.izzel.tools
+    implementation libs.arclight.api
+    implementation libs.mixin.tools
+    annotationProcessor libs.mixin.tools
+    mixinProcessorSupport libs.gson
+    mixinProcessorSupport 'com.google.guava:guava:33.5.0-jre'
+    mixinProcessorSupport libs.asm.util
+    mixinProcessorSupport libs.asm.tree
+
+    // spigot
+    implementation libs.spigot.api
+    implementation libs.jline
+    implementation libs.terminalconsoleappender
+    implementation libs.specialsource
+    implementation libs.log4j.jul
+    implementation libs.bungeecord.chat
+    implementation libs.mysql.connectorj
+    implementation libs.snakeyaml
+
+    implementation project(':i18n-config')
+}
+
+compileJava {
+    options.compilerArgs << '-XDignore.symbol.file' << '-XDenableSunApiLintControl'
+    options.annotationProcessorPath = configurations.annotationProcessor + configurations.mixinProcessorSupport
+    options.encoding = 'UTF-8'
+}
+/mace 
+/spear 
+/netherithe amor 
+/netherithe tools
+/diamond amor 
+/diamond tools 
+/windcharge
+/anchatementbook
+/crafting table
+/smithing table
+/acces
